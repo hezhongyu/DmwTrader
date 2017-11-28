@@ -9,9 +9,9 @@ revised by Zhongyu
 
 import math
 
-from DmwTrader import stratanalyzer
-from DmwTrader import observer
-from DmwTrader import dataseries
+from dmwTrader import stratanalyzer
+from dmwTrader import observer
+from dmwTrader import dataseries
 
 
 # Helper class to calculate time-weighted returns in a portfolio.

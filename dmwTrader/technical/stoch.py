@@ -7,9 +7,9 @@
 revised by Zhongyu
 """
 
-from DmwTrader import technical
-from DmwTrader.dataseries import bards
-from DmwTrader.technical import ma
+from dmwTrader import technical
+from dmwTrader.dataseries import bards
+from dmwTrader.technical import ma
 
 
 def get_low_high_values(useAdjusted, bars):

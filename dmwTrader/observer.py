@@ -9,7 +9,7 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import dispatchprio
+from dmwTrader import dispatchprio
 
 
 class Event(object):

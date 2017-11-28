@@ -7,10 +7,10 @@
 revised by Zhongyu
 """
 
-from DmwTrader.utils import dt
-from DmwTrader.utils import csvutils
-from DmwTrader.barfeed import membf
-from DmwTrader import bar
+from dmwTrader.utils import dt
+from dmwTrader.utils import csvutils
+from dmwTrader.barfeed import membf
+from dmwTrader import bar
 
 import datetime
 import pytz

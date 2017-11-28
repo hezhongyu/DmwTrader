@@ -7,8 +7,8 @@
 revised by Zhongyu
 """
 
-from DmwTrader import dataseries
-from DmwTrader.dataseries import bards
+from dmwTrader import dataseries
+from dmwTrader.dataseries import bards
 
 
 class Line(object):

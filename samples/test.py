@@ -1,6 +1,6 @@
-from DmwTrader import strategy
-from DmwTrader.barfeed import yahoofeed
-from DmwTrader.technical import ma
+from dmwTrader import strategy
+from dmwTrader.barfeed import yahoofeed
+from dmwTrader.technical import ma
 
 
 class MyStrategy(strategy.BacktestingStrategy):

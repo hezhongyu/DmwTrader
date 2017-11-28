@@ -7,8 +7,8 @@
 revised by Zhongyu
 """
 
-from DmwTrader import technical
-from DmwTrader import utils
+from dmwTrader import technical
+from dmwTrader import utils
 
 
 class RatioEventWindow(technical.EventWindow):

@@ -7,8 +7,8 @@
 revised by Zhongyu
 """
 
-from DmwTrader.technical import ma
-from DmwTrader import dataseries
+from dmwTrader.technical import ma
+from dmwTrader import dataseries
 
 
 class MACD(dataseries.SequenceDataSeries):

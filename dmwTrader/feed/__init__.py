@@ -9,8 +9,8 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import observer
-from DmwTrader import dataseries
+from dmwTrader import observer
+from dmwTrader import dataseries
 
 
 def feed_iterator(feed):

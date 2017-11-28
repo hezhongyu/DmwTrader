@@ -7,8 +7,8 @@
 revised by Zhongyu
 """
 
-from DmwTrader import technical
-from DmwTrader.dataseries import bards
+from dmwTrader import technical
+from dmwTrader.dataseries import bards
 
 
 # This event window will calculate and hold true-range values.

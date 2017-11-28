@@ -11,8 +11,8 @@ revised by Zhongyu
 import abc
 import datetime
 
-from DmwTrader.utils import dt
-from DmwTrader import bar
+from dmwTrader.utils import dt
+from dmwTrader import bar
 
 
 class TimeRange(abc.ABC):

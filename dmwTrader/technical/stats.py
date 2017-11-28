@@ -7,7 +7,7 @@
 revised by Zhongyu
 """
 
-from DmwTrader import technical
+from dmwTrader import technical
 
 
 class StdDevEventWindow(technical.EventWindow):

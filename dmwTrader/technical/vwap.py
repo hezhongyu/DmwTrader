@@ -7,8 +7,8 @@
 revised by Zhongyu
 """
 
-from DmwTrader import technical
-from DmwTrader.dataseries import bards
+from dmwTrader import technical
+from dmwTrader.dataseries import bards
 
 
 class VWAPEventWindow(technical.EventWindow):

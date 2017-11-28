@@ -9,10 +9,10 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import broker
-from DmwTrader.broker import fillstrategy
-from DmwTrader import logger
-import DmwTrader.bar
+from dmwTrader import broker
+from dmwTrader.broker import fillstrategy
+from dmwTrader import logger
+import dmwTrader.bar
 
 
 ######################################################################
@@ -387,7 +387,7 @@ class Broker(broker.Broker):
         # before waiting for the next bar.
         if not order.getGoodTillCanceled():
             expired = False
-            if self.__barFeed.getFrequency() >= DmwTrader.bar.Frequency.DAY:
+            if self.__barFeed.getFrequency() >= dmwTrader.bar.Frequency.DAY:
                 expired = bar_.getDateTime().date() >= order.getAcceptedDateTime().date()
 
             # Cancel the order if it will expire in the next bar.

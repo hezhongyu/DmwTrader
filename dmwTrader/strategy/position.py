@@ -7,9 +7,9 @@
 revised by Zhongyu
 """
 
-from DmwTrader.stratanalyzer import returns
-from DmwTrader import warninghelpers
-from DmwTrader import broker
+from dmwTrader.stratanalyzer import returns
+from dmwTrader import warninghelpers
+from dmwTrader import broker
 
 import datetime
 

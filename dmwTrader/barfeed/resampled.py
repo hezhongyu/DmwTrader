@@ -8,10 +8,10 @@ revised by Zhongyu
 """
 
 
-from DmwTrader import barfeed
-from DmwTrader.dataseries import resampled
-from DmwTrader import resamplebase
-from DmwTrader import bar
+from dmwTrader import barfeed
+from dmwTrader.dataseries import resampled
+from dmwTrader import resamplebase
+from dmwTrader import bar
 
 
 class BarsGrouper(resamplebase.Grouper):

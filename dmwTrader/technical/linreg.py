@@ -7,9 +7,9 @@
 revised by Zhongyu
 """
 
-from DmwTrader import technical
-from DmwTrader.utils import collections
-from DmwTrader.utils import dt
+from dmwTrader import technical
+from dmwTrader.utils import collections
+from dmwTrader.utils import dt
 
 import numpy as np
 from scipy import stats

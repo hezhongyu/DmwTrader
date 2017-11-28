@@ -7,8 +7,8 @@
 revised by Zhongyu
 """
 
-from DmwTrader import feed
-from DmwTrader import dataseries
+from dmwTrader import feed
+from dmwTrader import dataseries
 
 
 class MemFeed(feed.BaseFeed):

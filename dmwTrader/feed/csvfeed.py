@@ -10,9 +10,9 @@ revised by Zhongyu
 import abc
 import datetime
 
-from DmwTrader.utils import dt
-from DmwTrader.utils import csvutils
-from DmwTrader.feed import memfeed
+from dmwTrader.utils import dt
+from dmwTrader.utils import csvutils
+from dmwTrader.feed import memfeed
 
 
 # Interface for csv row parsers.

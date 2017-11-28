@@ -8,10 +8,10 @@ revised by Zhongyu
 """
 
 
-from DmwTrader.barfeed import csvfeed
-from DmwTrader.barfeed import common
-from DmwTrader.utils import dt
-from DmwTrader import bar
+from dmwTrader.barfeed import csvfeed
+from dmwTrader.barfeed import common
+from dmwTrader.utils import dt
+from dmwTrader import bar
 
 import datetime
 

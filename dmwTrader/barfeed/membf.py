@@ -7,9 +7,9 @@
 revised by Zhongyu
 """
 
-from DmwTrader import barfeed
-from DmwTrader import bar
-from DmwTrader import utils
+from dmwTrader import barfeed
+from dmwTrader import bar
+from dmwTrader import utils
 
 
 # A non real-time BarFeed responsible for:

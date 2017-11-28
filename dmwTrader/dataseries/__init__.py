@@ -9,8 +9,8 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import observer
-from DmwTrader.utils import collections
+from dmwTrader import observer
+from dmwTrader.utils import collections
 
 DEFAULT_MAX_LEN = 1024
 

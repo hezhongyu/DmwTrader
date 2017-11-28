@@ -9,10 +9,10 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import dataseries
-from DmwTrader.dataseries import bards
-from DmwTrader import bar
-from DmwTrader import resamplebase
+from dmwTrader import dataseries
+from dmwTrader.dataseries import bards
+from dmwTrader import bar
+from dmwTrader import resamplebase
 
 
 class AggFunGrouper(resamplebase.Grouper):

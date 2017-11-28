@@ -7,9 +7,9 @@
 revised by Zhongyu
 """
 
-from DmwTrader import dataseries
-from DmwTrader.technical import ma
-from DmwTrader.technical import stats
+from dmwTrader import dataseries
+from dmwTrader.technical import ma
+from dmwTrader.technical import stats
 
 
 class BollingerBands(object):

@@ -7,8 +7,8 @@
 revised by Zhongyu
 """
 
-from DmwTrader.utils import collections
-from DmwTrader import dataseries
+from dmwTrader.utils import collections
+from dmwTrader import dataseries
 
 
 class EventWindow(object):

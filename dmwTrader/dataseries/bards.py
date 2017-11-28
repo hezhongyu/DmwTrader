@@ -7,7 +7,7 @@
 revised by Zhongyu
 """
 
-from DmwTrader import dataseries
+from dmwTrader import dataseries
 
 
 class BarDataSeries(dataseries.SequenceDataSeries):

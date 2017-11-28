@@ -9,10 +9,10 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import bar
-from DmwTrader.dataseries import bards
-from DmwTrader import feed
-from DmwTrader import dispatchprio
+from dmwTrader import bar
+from dmwTrader.dataseries import bards
+from dmwTrader import feed
+from dmwTrader import dispatchprio
 
 
 # This is only for backward compatibility since Frequency used to be defined here and not in bar.py.

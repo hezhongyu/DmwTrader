@@ -8,7 +8,7 @@ revised by Zhongyu
 """
 
 import numpy as np
-from DmwTrader import technical
+from dmwTrader import technical
 
 
 # This is the formula I'm using to calculate the averages based on previous ones.

@@ -7,9 +7,9 @@
 revised by Zhongyu
 """
 
-from DmwTrader import utils
-from DmwTrader import observer
-from DmwTrader import dispatchprio
+from dmwTrader import utils
+from dmwTrader import observer
+from dmwTrader import dispatchprio
 
 
 # This class is responsible for dispatching events from multiple subjects, synchronizing them if necessary.

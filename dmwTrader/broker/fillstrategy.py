@@ -9,9 +9,9 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import broker
-import DmwTrader.bar
-from DmwTrader.broker import slippage
+from dmwTrader import broker
+import dmwTrader.bar
+from dmwTrader.broker import slippage
 
 
 # Returns the trigger price for a Limit or StopLimit order, or None if the limit price was not yet penetrated.
@@ -228,7 +228,7 @@ class DefaultStrategy(FillStrategy):
         for instrument in bars.getInstruments():
             bar = bars[instrument]
             # Reset the volume available for each instrument.
-            if bar.getFrequency() == DmwTrader.bar.Frequency.TRADE:
+            if bar.getFrequency() == dmwTrader.bar.Frequency.TRADE:
                 volumeLeft[instrument] = bar.getVolume()
             elif self.__volumeLimit is not None:
                 # We can't round here because there is no order to request the instrument traits.
@@ -322,7 +322,7 @@ class DefaultStrategy(FillStrategy):
         assert price is not None
 
         # Don't slip prices when the bar represents the trading activity of a single trade.
-        if bar.getFrequency() != DmwTrader.bar.Frequency.TRADE:
+        if bar.getFrequency() != dmwTrader.bar.Frequency.TRADE:
             price = self.__slippageModel.calculatePrice(
                 order, price, fillSize, bar, self.__volumeUsed[order.getInstrument()]
             )
@@ -378,7 +378,7 @@ class DefaultStrategy(FillStrategy):
             assert price is not None
 
             # Don't slip prices when the bar represents the trading activity of a single trade.
-            if bar.getFrequency() != DmwTrader.bar.Frequency.TRADE:
+            if bar.getFrequency() != dmwTrader.bar.Frequency.TRADE:
                 price = self.__slippageModel.calculatePrice(
                     order, price, fillSize, bar, self.__volumeUsed[order.getInstrument()]
                 )

@@ -9,8 +9,8 @@ revised by Zhongyu
 
 import abc
 
-from DmwTrader import observer
-from DmwTrader import dispatchprio
+from dmwTrader import observer
+from dmwTrader import dispatchprio
 
 
 # This class is used to prevent bugs like the one triggered in testcases.bitstamp_test:TestCase.testRoundingBug.

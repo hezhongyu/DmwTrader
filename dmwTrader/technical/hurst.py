@@ -9,7 +9,7 @@ revised by Zhongyu
 
 import numpy as np
 
-from DmwTrader import technical
+from dmwTrader import technical
 
 
 # Code Tom Starke for the Hurst Exponent.
