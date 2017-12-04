@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from dmwTrader import strategy
 from dmwTrader.barfeed import yahoofeed
 from dmwTrader.technical import ma
@@ -47,7 +49,7 @@ class MyStrategy(strategy.BacktestingStrategy):
 def run_strategy(smaPeriod):
     # Load the yahoo feed from the CSV file
     feed = yahoofeed.Feed()
-    feed.addBarsFromCSV("aapl", "data/aapl-2012-yahoofinance.csv")
+    feed.addBarsFromCSV("aapl", "data/aapl-2011-yahoofinance.csv")
 
     # Evaluate the strategy with the feed.
     myStrategy = MyStrategy(feed, "aapl", smaPeriod)
@@ -55,6 +57,3 @@ def run_strategy(smaPeriod):
     print("Final portfolio value: $%.2f" % myStrategy.getBroker().getEquity())
 
 run_strategy(15)
-
-
-

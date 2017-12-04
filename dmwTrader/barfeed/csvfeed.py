@@ -167,9 +167,7 @@ class GenericRowParser(RowParser):
 
         # Process extra columns.
         extra = {}
-        # py2 to 3 修改
-        # for k, v in csvRowDict.iteritems():
-        for k, v in csvRowDict.iteritems():
+        for k, v in csvRowDict.items():
             if k not in self.__columnNames:
                 extra[k] = csvutils.float_or_string(v)
 
@@ -253,7 +251,6 @@ class GenericBarFeed(BarFeed):
         :param timezone: The timezone to use to localize bars. Check :mod:`pyalgotrade.marketsession`.
         :type timezone: A pytz timezone.
         """
-
         if timezone is None:
             timezone = self.__timezone
 

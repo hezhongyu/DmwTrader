@@ -20,8 +20,6 @@ class FastDictReader(object):
         self.__fieldNames = fieldnames
         self.reader = csv.reader(f, dialect, *args, **kwargs)
         if self.__fieldNames is None:
-            # py2to3修改
-            # self.__fieldNames = .reader.next()
             self.__fieldNames = next(self.reader)
         self.__dict = {}
 
@@ -30,19 +28,14 @@ class FastDictReader(object):
 
     def __next__(self):
         # Skip empty rows.
-        # py2 to 3 修改
-        # row = self.reader.next()
         row = next(self.reader)
         while row == []:
-            # row = self.reader.next()
             row = next(self.reader)
 
         # Check that the row has the right number of columns.
         assert(len(self.__fieldNames) == len(row))
 
         # Copy the row values into the dict.
-        # py2 to 3修改
-        # for i in xrange(len(self.__fieldNames)):
         for i in range(len(self.__fieldNames)):
             self.__dict[self.__fieldNames[i]] = row[i]
 

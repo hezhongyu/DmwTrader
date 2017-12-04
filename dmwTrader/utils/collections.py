@@ -112,6 +112,7 @@ class ListDeque(object):
         self.__values.append(value)
         # Check bounds
         if len(self.__values) > self.__maxLen:
+            # 若超出最大长度，则删除第一位
             self.__values.pop(0)
 
     def data(self):
