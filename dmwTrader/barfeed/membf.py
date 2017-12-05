@@ -57,9 +57,6 @@ class BarFeed(barfeed.BaseBarFeed):
 
         # Add and sort the bars
         self.__bars[instrument].extend(bars)
-        # py2 to 3 修改
-        # barCmp = lambda x, y: cmp(x.getDateTime(), y.getDateTime())
-        # self.__bars[instrument].sort(barCmp)
         self.__bars[instrument].sort(key=lambda x: x.getDateTime())
 
         self.registerInstrument(instrument)
