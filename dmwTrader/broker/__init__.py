@@ -477,15 +477,13 @@ class OrderEvent(object):
 
 ######################################################################
 # Base broker class
-class Broker(observer.Subject):
+class Broker(observer.Subject, abc.ABC):
     """Base class for brokers.
 
     .. note::
 
         This is a base class and should not be used directly.
     """
-
-    __metaclass__ = abc.ABCMeta
 
     def __init__(self):
         super(Broker, self).__init__()

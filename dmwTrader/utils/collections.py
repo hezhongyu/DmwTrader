@@ -5,8 +5,11 @@
 .. moduleauthor:: Gabriel Martin Becedillas Ruiz <gabriel.becedillas@gmail.com>
 
 revised by Zhongyu
+.. note::本文件扩展了collections，原本collections数据结构功能统一调用本模块实现，以免造成命名冲突
 """
 
+
+from collections import *
 import numpy as np
 
 

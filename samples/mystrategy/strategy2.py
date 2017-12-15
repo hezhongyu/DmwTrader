@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 from dmwTrader import strategy
 from dmwTrader.barfeed import tbfeed
 from dmwTrader.technical import macd
@@ -10,7 +11,7 @@ class myStrategy(strategy.BacktestingStrategy):
         super(myStrategy, self).__init__(feed, 100000)
         self.__position = None
         self.__instrument = instrument
-        self.__macd = macd.MACD(feed[instrument].getPriceDataSeries(), 12, 26, 9)
+        self.__macd = macd.MACD(feed[instrument].getPriceDataSeries())
 
 
     def onEnterOk(self, position):
@@ -28,12 +29,16 @@ class myStrategy(strategy.BacktestingStrategy):
         if self.__macd[-1] is None:
             return
 
+        time = bar.getDateTime()
+        if time >= datetime.datetime(2017, 9, 1) and time <= datetime.datetime(2017, 9, 2):
+            print(time)
+            print("macd:" + str(self.__macd.getHistogram()[-1]))
         if self.__position is None:
-            if self.__macd[-1] > 0:
+            if self.__macd.getHistogram()[-1] > 0:
                 # Enter a buy market order for 10 shares. The order is good till canceled.
                 self.__position = self.enterLong(self.__instrument, 10, True)
         # Check if we have to exit the position.
-        elif self.__macd[-1] < 0 and not self.__position.exitActive():
+        elif self.__macd.getHistogram()[-1] < 0 and not self.__position.exitActive():
             self.__position.exitMarket()
 
 

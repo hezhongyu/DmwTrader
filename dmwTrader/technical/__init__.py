@@ -73,9 +73,9 @@ class EventBasedFilter(dataseries.SequenceDataSeries):
         self.__eventWindow = eventWindow
 
     def __onNewValue(self, dataSeries, dateTime, value):
-        # Let the event window perform calculations.
+        # 调整Eventindow中的数据.
         self.__eventWindow.onNewValue(dateTime, value)
-        # Get the resulting value
+        # 在EventWindow的子类中计算结果
         newValue = self.__eventWindow.getValue()
         # Add the new value.
         self.appendWithDateTime(dateTime, newValue)

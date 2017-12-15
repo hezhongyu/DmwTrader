@@ -18,14 +18,12 @@ import dmwTrader.bar
 ######################################################################
 # Commission models
 
-class Commission(object):
+class Commission(abc.ABC):
     """Base class for implementing different commission schemes.
 
     .. note::
         This is a base class and should not be used directly.
     """
-
-    __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
     def calculate(self, order, price, quantity):

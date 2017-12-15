@@ -3,13 +3,15 @@
 from dmwTrader import strategy
 from dmwTrader.barfeed import tbfeed
 from dmwTrader.technical import ma
+from dmwTrader.utils import collections
 
 
 class MyStrategy(strategy.BacktestingStrategy):
     def __init__(self, feed, instrument, smaPeriod):
-        super(MyStrategy, self).__init__(feed, 100000)
+        super(MyStrategy, self).__init__(feed)
         self.__position = None
         self.__instrument = instrument
+        # 将sma与bar的收盘价绑定，拿收盘价作sma
         self.__sma = ma.SMA(feed[instrument].getPriceDataSeries(), smaPeriod)
 
     def onEnterOk(self, position):
@@ -30,6 +32,7 @@ class MyStrategy(strategy.BacktestingStrategy):
 
     def onBars(self, bars):
         # Wait for enough bars to be available to calculate a SMA.
+        print(self.__sma[-1])
         if self.__sma[-1] is None:
             return
 
@@ -53,3 +56,5 @@ def run_strategy(smaPeriod):
     print("Final portfolio value: $%.2f" % myStrategy.getBroker().getEquity())
 
 run_strategy(15)
+
+

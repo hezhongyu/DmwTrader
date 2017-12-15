@@ -187,18 +187,18 @@ class DefaultStrategy(FillStrategy):
 
     This strategy works as follows:
 
-    * A :class:`pyalgotrade.broker.MarketOrder` is always filled using the open/close price.
-    * A :class:`pyalgotrade.broker.LimitOrder` will be filled like this:
+    * A :class:`dmwTrader.broker.MarketOrder` is always filled using the open/close price.
+    * A :class:`dmwTrader.broker.LimitOrder` will be filled like this:
         * If the limit price was penetrated with the open price, then the open price is used.
         * If the bar includes the limit price, then the limit price is used.
         * Note that when buying the price is penetrated if it gets <= the limit price, and when selling the price
           is penetrated if it gets >= the limit price
-    * A :class:`pyalgotrade.broker.StopOrder` will be filled like this:
+    * A :class:`dmwTrader.broker.StopOrder` will be filled like this:
         * If the stop price was penetrated with the open price, then the open price is used.
         * If the bar includes the stop price, then the stop price is used.
         * Note that when buying the price is penetrated if it gets >= the stop price, and when selling the price
           is penetrated if it gets <= the stop price
-    * A :class:`pyalgotrade.broker.StopLimitOrder` will be filled like this:
+    * A :class:`dmwTrader.broker.StopLimitOrder` will be filled like this:
         * If the stop price was penetrated with the open price, or if the bar includes the stop price, then the limit
           order becomes active.
         * If the limit order is active:
@@ -209,7 +209,7 @@ class DefaultStrategy(FillStrategy):
 
     .. note::
         * This is the default strategy used by the Broker.
-        * It uses :class:`pyalgotrade.broker.slippage.NoSlippage` slippage model by default.
+        * It uses :class:`dmwTrader.broker.slippage.NoSlippage` slippage model by default.
         * If volumeLimit is 0.25, and a certain bar's volume is 100, then no more than 25 shares can be used by all
           orders that get processed at that bar.
         * If using trade bars, then all the volume from that bar can be used.
@@ -222,6 +222,7 @@ class DefaultStrategy(FillStrategy):
         self.setVolumeLimit(volumeLimit)
         self.setSlippageModel(slippage.NoSlippage())
 
+    # 更新了可用交易量
     def onBars(self, broker_, bars):
         volumeLeft = {}
 

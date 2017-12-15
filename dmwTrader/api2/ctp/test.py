@@ -8,12 +8,12 @@ api模块测试
 
 import time
 
-from dmwTrader.api.ctp_setting import *
+from dmwTrader.api2.ctp.ctp_setting import *
+from dmwTrader.api2.ctp.CTPMdApi import CTPMdApi
 
-from dmwTrader.api.PyCTP_api import PyCTP_Trader, PyCTP_Market
 
-
-def __main__():
+def test():
+    print('asdf')
     brokerID = CTPAPI_BrokerID
     userID = CTPAPI_UserID
     password = CTPAPI_Password
@@ -22,14 +22,14 @@ def __main__():
 
     exchangeID = b'SHFE'
     instrumentID = b'rb1801'
-    trader = PyCTP_Trader.CreateFtdcTraderApi(b'_tmp_t_')
-    market = PyCTP_Market.CreateFtdcMdApi(b'_tmp_m_')
+    # trader = PyCTP_Trader.CreateFtdcTraderApi(b'_tmp_t_')
+    market = CTPMdApi.CreateFtdcMdApi(b'_tmp_m_')
 
-    print('连接前置', trader.Connect(tdAddress))
+    # print('连接前置', trader.Connect(tdAddress))
     print('连接前置', market.Connect(mdAddress))
-    print('账号登陆', trader.Login(brokerID, userID, password))
+    # print('账号登陆', trader.Login(brokerID, userID, password))
     print('账号登陆', market.Login(brokerID, userID, password))
-    print('投资者代码', trader.setInvestorID(userID))
+    # print('投资者代码', trader.setInvestorID(userID))
 
     # time.sleep(1.0)
     # print('查询交易所', trader.QryExchange())
@@ -55,9 +55,10 @@ def __main__():
             break
     time.sleep(1.0)
     print('退订行情:', market.UnSubMarketData([instrumentID]))
-    print('账号登出', trader.Logout())
+    # print('账号登出', trader.Logout())
     print('账号登出', market.Logout())
 
 
-if __name__ == '__main__':
-    __main__()
+if __name__ == "__main__":
+    print('adsf')
+    test()

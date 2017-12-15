@@ -23,9 +23,9 @@ class BaseStrategy(abc.ABC):
     """Base class for strategies.
 
     :param barFeed: The bar feed that will supply the bars.
-    :type barFeed: :class:`pyalgotrade.barfeed.BaseBarFeed`.
+    :type barFeed: :class:`dmwTrader.barfeed.BaseBarFeed`.
     :param broker: The broker that will handle orders.
-    :type broker: :class:`pyalgotrade.broker.Broker`.
+    :type broker: :class:`dmwTrader.broker.Broker`.
 
     .. note::
         This is a base class and should not be used directly.
@@ -50,6 +50,7 @@ class BaseStrategy(abc.ABC):
         self.__dispatcher.getIdleEvent().subscribe(self.__onIdle)
 
         # It is important to dispatch broker events before feed events, specially if we're backtesting.
+        # 经测试，dispatcher不绑定broker也能运行
         self.__dispatcher.addSubject(self.__broker)
         self.__dispatcher.addSubject(self.__barFeed)
 
