@@ -11,7 +11,7 @@ import os
 # sys.stdout = codecs.getwriter('utf8')(sys.stdout)
 # sys.stderr = codecs.getwriter('utf8')(sys.stderr)
 
-from .vnctpmd import MdApi
+from dmwTrader.api.ctp.vnctpmd import MdApi
 
 #----------------------------------------------------------------------
 def print_dict(d):
@@ -100,14 +100,13 @@ class CTPMdApi(MdApi):
     #----------------------------------------------------------------------
     def onRspError(self, error, n, last):
         """错误回报"""
-
-        log = u'行情错误回报，错误代码：' + (error['ErrorID']) + u',' + u'错误信息：' + error['ErrorMsg'].decode('gbk')
+        log = error
+        # log = u'行情错误回报，错误代码：' + (error['ErrorID']) + u',' + u'错误信息：' + error['ErrorMsg'].decode('gbk')
         print(log)
 
     #----------------------------------------------------------------------
     def onRspUserLogin(self, data, error, n, last):
         """登陆回报"""
-
         if error['ErrorID'] == 0:
             log = u'行情服务器登陆成功'
         else:
@@ -146,7 +145,6 @@ class CTPMdApi(MdApi):
     def onRtnDepthMarketData(self, data):
         """行情推送"""
         instrument = data['InstrumentID']
-
         # print_dict(data)
 
         if instrument not in self.__instruments:
@@ -164,7 +162,6 @@ class CTPMdApi(MdApi):
                 df = self.__ticksDf[instrument]
 
                 # print df
-
                 last_quotation_time = None if len(df) == 0 else df.ix[len(df)-1].time
 
                 if valid_tick_data(time, pre_close, price, last_quotation_time):
@@ -199,9 +196,6 @@ class CTPMdApi(MdApi):
 
         # 注册服务器地址
         self.registerFront(address)
-
-
-
 
         # 初始化连接，成功会调用onFrontConnected
         self.init()

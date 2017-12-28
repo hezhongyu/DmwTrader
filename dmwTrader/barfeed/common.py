@@ -3,8 +3,6 @@
 """
 .. modulefrom:: pyalgotrade
 .. moduleauthor:: Gabriel Martin Becedillas Ruiz <gabriel.becedillas@gmail.com>
-
-revised by Zhongyu
 """
 
 

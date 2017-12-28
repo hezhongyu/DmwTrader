@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-.. modulefrom:: pyalgotrade
+.. modulefrom:: pyalgotrade and pyalgotrade-cn
 .. moduleauthor:: Gabriel Martin Becedillas Ruiz <gabriel.becedillas@gmail.com>
+.. modified by: James Ge(james.ge@gmail.com)
+.. second modified by: Zhongyu
 
-revised by Zhongyu
+note:
+本模块定义了该交易器较为核心的几组数据结构
+tick类是pyalgotrade-cn中为了实盘交易而加入的
 """
 
 import abc
@@ -287,3 +291,246 @@ class Bars(object):
     def getBar(self, instrument):
         """Returns the :class:`pyalgotrade.bar.Bar` for the given instrument or None if the instrument is not found."""
         return self.__barDict.get(instrument, None)
+
+
+class BasicTick(object):
+    # Optimization to reduce memory footprint.
+    __slots__ = (
+        '__dateTime',
+        '__open',
+        '__close',
+        '__high',
+        '__low',
+        '__volume',
+        '__amount',
+        '__bp',
+        '__bv',
+        '__ap',
+        '__av',
+        '__preclose',
+        '__new_price',
+        '__bought_amount',
+        '__sold_amount',
+        '__bought_volume',
+        '__sold_volume',
+        '__frequency',
+        '__extra',
+        '__useAdjustedValue',
+    )
+
+    def __init__(self, dateTime, open_, high, low, close, volume, amount, bp, bv, ap, av, preclose \
+                 , new_price, bought_amount, sold_amount, bought_volume, sold_volume, frequency, extra={}):
+
+        if high < low:
+            raise Exception("high < low on %s" % (dateTime))
+        elif high < open_:
+            raise Exception("high < open on %s" % (dateTime))
+        elif high < close:
+            raise Exception("high < close on %s" % (dateTime))
+        elif low > open_:
+            raise Exception("low > open on %s" % (dateTime))
+        elif low > close:
+            raise Exception("low > close on %s" % (dateTime))
+
+        self.__dateTime = dateTime
+        self.__open = open_
+        self.__close = close
+        self.__high = high
+        self.__low = low
+        self.__volume = volume
+        self.__amount = amount
+        self.__bp = bp
+        self.__ap = ap
+        self.__bv = bv
+        self.__av = av
+        self.__preclose = preclose
+        self.__bought_amount = bought_amount
+        self.__sold_amount = sold_amount
+        self.__bought_volume = bought_volume
+        self.__sold_volume = sold_volume
+        self.__frequency = frequency
+        self.__extra = extra
+        self.__useAdjustedValue = False
+
+    def __setstate__(self, state):
+        (self.__dateTime,
+         self.__open,
+         self.__close,
+         self.__high,
+         self.__low,
+         self.__volume,
+         self.__amount,
+         self.__bp,
+         self.__ap,
+         self.__bv,
+         self.__av,
+         self.__preclose,
+         self.__bought_amount,
+         self.__sold_amount,
+         self.__bought_volume,
+         self.__sold_volume,
+         self.__frequency,
+         self.__extra) = state
+
+    def __getstate__(self):
+        return (self.__dateTime,
+                self.__open,
+                self.__close,
+                self.__high,
+                self.__low,
+                self.__volume,
+                self.__amount,
+                self.__bp,
+                self.__ap,
+                self.__bv,
+                self.__av,
+                self.__preclose,
+                self.__bought_amount,
+                self.__sold_amount,
+                self.__bought_volume,
+                self.__sold_volume,
+                self.__frequency,
+                self.__extra)
+
+    def getDateTime(self):
+        return self.__dateTime
+
+    def getOpen(self, adjusted=False):
+        if adjusted:
+            if self.__adjClose is None:
+                raise Exception("Adjusted close is missing")
+            return self.__adjClose * self.__open / float(self.__close)
+        else:
+            return self.__open
+
+    def getHigh(self, adjusted=False):
+        if adjusted:
+            if self.__adjClose is None:
+                raise Exception("Adjusted close is missing")
+            return self.__adjClose * self.__high / float(self.__close)
+        else:
+            return self.__high
+
+    def getLow(self, adjusted=False):
+        if adjusted:
+            if self.__adjClose is None:
+                raise Exception("Adjusted close is missing")
+            return self.__adjClose * self.__low / float(self.__close)
+        else:
+            return self.__low
+
+    def getClose(self, adjusted=False):
+        return self.__close
+
+    def getVolume(self):
+        return self.__volume
+
+    def getAmount(self):
+        return self.__amount
+
+    def getFrequency(self):
+        return self.__frequency
+
+    def getBp(self):
+        return self.__bp
+
+    def getBv(self):
+        return self.__bv
+
+    def getAp(self):
+        return self.__ap
+
+    def getAv(self):
+        return self.__av
+
+    def getPreclose(self):
+        return self.__preclose
+
+    def getBoughtVolume(self):
+        return self.__bought_volume
+
+    def getBoughtAmount(self):
+        return self.__bought_amount
+
+    def getSoldVolume(self):
+        return self.__sold_volume
+
+    def getSoldAmount(self):
+        return self.__sold_amount
+
+    def getExtraColumns(self):
+        return self.__extra
+
+    def setUseAdjustedValue(self, useAdjusted):
+        if useAdjusted and self.__adjClose is None:
+            raise Exception("Adjusted close is not available")
+        self.__useAdjustedValue = useAdjusted
+
+    def getUseAdjValue(self):
+        return self.__useAdjustedValue
+
+    def getAdjClose(self):
+        return self.__close
+
+    def getPrice(self):
+        return self.__close
+
+
+class Ticks(object):
+    """A group of :class:`Tick` objects.
+
+    :param tickDict: A map of instrument to :class:`Tick` objects.
+    :type tickDict: map.
+
+    .. note::
+        All ticks must have the same datetime.
+    """
+
+    def __init__(self, tickDict):
+        if len(tickDict) == 0:
+            raise Exception("No bars supplied")
+
+        # Check that bar datetimes are in sync
+        firstDateTime = None
+        firstInstrument = None
+        for instrument, currentBar in tickDict.iteritems():
+            if firstDateTime is None:
+                firstDateTime = currentBar.getDateTime()
+                firstInstrument = instrument
+            elif currentBar.getDateTime() != firstDateTime:
+                raise Exception("Bar data times are not in sync. %s %s != %s %s" % (
+                    instrument,
+                    currentBar.getDateTime(),
+                    firstInstrument,
+                    firstDateTime
+                ))
+
+        self.__tickDict = tickDict
+        self.__dateTime = firstDateTime
+
+    def __getitem__(self, instrument):
+        """Returns the :class:`pyalgotrade.bar.Bar` for the given instrument.
+        If the instrument is not found an exception is raised."""
+        return self.__tickDict[instrument]
+
+    def __contains__(self, instrument):
+        """Returns True if a :class:`pyalgotrade.bar.Bar` for the given instrument is available."""
+        return instrument in self.__tickDict
+
+    def items(self):
+        return self.__tickDict.items()
+
+    def keys(self):
+        return self.__tickDict.keys()
+
+    def getInstruments(self):
+        """Returns the instrument symbols."""
+        return self.__tickDict.keys()
+
+    def getDateTime(self):
+        """Returns the :class:`datetime.datetime` for this set of bars."""
+        return self.__dateTime
+
+    def getBar(self, instrument):
+        """Returns the :class:`pyalgotrade.bar.Bar` for the given instrument or None if the instrument is not found."""
+        return self.__tickDict.get(instrument, None)

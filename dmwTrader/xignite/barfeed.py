@@ -21,18 +21,18 @@
 import time
 import datetime
 import threading
-import Queue
+import queue
 
-from pyalgotrade import bar
-from pyalgotrade import barfeed
-from pyalgotrade import dataseries
-from pyalgotrade import resamplebase
-import pyalgotrade.logger
-from pyalgotrade.utils import dt
-import api
+from dmwTrader import bar
+from dmwTrader import barfeed
+from dmwTrader import dataseries
+from dmwTrader import resamplebase
+import dmwTrader.logger
+from dmwTrader.utils import dt
+# import api
 
 
-logger = pyalgotrade.logger.getLogger("xignite")
+logger = dmwTrader.logger.getLogger("xignite")
 
 
 def utcnow():
@@ -63,7 +63,7 @@ class PollingThread(threading.Thread):
             if not self.__stopped:
                 try:
                     self.doCall()
-                except Exception, e:
+                except Exception as e:
                     logger.critical("Unhandled exception", exc_info=e)
         logger.debug("Thread finished.")
 
@@ -148,7 +148,7 @@ class GetBarThread(PollingThread):
                 response = api.XigniteGlobalRealTime_GetBar(self.__apiToken, indentifier, "Symbol", endDateTime, self.__precision, self.__period)
                 # logger.debug(response)
                 barDict[indentifier] = build_bar(response["Bar"], indentifier, self.__frequency)
-            except api.XigniteError, e:
+            except api.XigniteError as e:
                 logger.error(e)
 
         if len(barDict):

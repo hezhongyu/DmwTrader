@@ -11,7 +11,7 @@ import abc
 import logging
 
 import dmwTrader.broker
-from dmwTrader.broker import backtesting
+from dmwTrader.broker import backtestingbroker
 from dmwTrader import observer
 from dmwTrader import dispatcher
 import dmwTrader.strategy.position
@@ -570,7 +570,7 @@ class BacktestingStrategy(BaseStrategy):
         if isinstance(cash_or_brk, dmwTrader.broker.Broker):
             broker = cash_or_brk
         else:
-            broker = backtesting.Broker(cash_or_brk, barFeed)
+            broker = backtestingbroker.Broker(cash_or_brk, barFeed)
 
         BaseStrategy.__init__(self, barFeed, broker)
         self.__useAdjustedValues = False
